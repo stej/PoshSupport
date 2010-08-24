@@ -1,0 +1,13 @@
+Import-Module G:\data\src\PowerShell\dev\PoshSupport\MicroblogReader\IdenticaOAuth.psm1 -force
+Set-ConsumerInfo '...........a' '..............b'
+Set-AccessTokenPath (join-path $psflash data\personal\microblogReader\identica.accesstoken.clixml)
+Register-OnIdentica
+Request-Identica 'http://identi.ca/api/statuses/friends_timeline.xml?count=5'
+
+
+Import-Module G:\data\src\PowerShell\dev\PoshSupport\MicroblogReader\TwitterOAuth.psm1 -force
+Set-ConsumerInfo '...........a' '..............b'
+Set-AccessTokenPath (join-path $psflash data\personal\microblogReader\twitter-stejcz.accesstoken.clixml)
+Register-OnTwitter
+Request-Twitter 'http://api.twitter.com/1/statuses/friends_timeline.xml?count=5'
+Request-Twitter 'http://api.twitter.com/1/statuses/retweeted_to_me.xml'
