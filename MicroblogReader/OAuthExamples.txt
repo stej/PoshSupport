@@ -1,13 +1,16 @@
-Import-Module G:\data\src\PowerShell\dev\PoshSupport\MicroblogReader\IdenticaOAuth.psm1 -force
-Set-ConsumerInfo '...........a' '..............b'
-Set-AccessTokenPath (join-path $psflash data\personal\microblogReader\identica.accesstoken.clixml)
-Register-OnIdentica
-Request-Identica 'http://identi.ca/api/statuses/friends_timeline.xml?count=5'
-
-
+# first register application on Twitter
 Import-Module G:\data\src\PowerShell\dev\PoshSupport\MicroblogReader\TwitterOAuth.psm1 -force
 Set-ConsumerInfo '...........a' '..............b'
-Set-AccessTokenPath (join-path $psflash data\personal\microblogReader\twitter-stejcz.accesstoken.clixml)
+# set path where the access token will be stored via (Export-CliXml) after registration
+Set-AccessTokenPath (join-path $psflash data\personal\microblogReader\Twitter.accesstoken.clixml)
 Register-OnTwitter
+# first request
+Request-Twitter 'http://identi.ca/api/statuses/friends_timeline.xml?count=5'
+
+# next time you only need to know the consumer info and path to the access token
+Import-Module G:\data\src\PowerShell\dev\PoshSupport\MicroblogReader\TwitterOAuth.psm1 -force
+Set-ConsumerInfo '...........a' '..............b'
+# set path to access token
+Set-AccessTokenPath (join-path $psflash data\personal\microblogReader\Twitter.accesstoken.clixml)
 Request-Twitter 'http://api.twitter.com/1/statuses/friends_timeline.xml?count=5'
 Request-Twitter 'http://api.twitter.com/1/statuses/retweeted_to_me.xml'
